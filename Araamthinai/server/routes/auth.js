@@ -11,8 +11,8 @@ const Razorpay = require("razorpay");
 // Register new user
 router.post('/register', async (req, res) => {
   try {
-    const { email,username, password } = req.body.data;
-    const newUser = new User({ email,username, password });
+    const { email,username, password,userType } = req.body.data;
+    const newUser = new User({ email,username, password ,userType});
     await newUser.save();
     res.status(201).json({ status:true,message: 'User registered successfully' });
   } catch (error) {
@@ -27,7 +27,6 @@ const razorpay = new Razorpay({
 });
 
 router.post('/razorpay', async (req, res) => {
-  console.log(req)
   try {
     const { amount } = req.body;
   const payment_capture = 1;
@@ -41,7 +40,6 @@ router.post('/razorpay', async (req, res) => {
   };
 
     const response=await razorpay.orders.create(options);
-    console.log(response)
     res.status(201).json({ message: 'Payment successful',
       id: response.id,
       currency: response.currency,
@@ -55,8 +53,9 @@ router.post('/razorpay', async (req, res) => {
 
 router.post('/payment', async (req, res) => {
   try {
-    const { paymentId } = req.body;
-    const newPayment = new Payment({paymentId });
+    const { paymentId,amount } = req.body;
+    // const username= JSON.parse(sessionStorage.getItem('user')).username;
+    const newPayment = new Payment({paymentId,amount});
     await newPayment.save();
     res.status(201).json({ message: 'Payment successful' });
   } catch (error) {
@@ -80,7 +79,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ status:false,message: 'Authentication failed' });
     }
 
-    res.json({ status:true,message: 'Login successful' });
+    res.json({ status:true,message: 'Login successful',data:{'username':user.username,usertype:user.userType} });
   } catch (error) {
     res.status(500).json({ status:false,message: 'An error occurred' });
   }

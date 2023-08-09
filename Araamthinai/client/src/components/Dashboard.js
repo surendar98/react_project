@@ -4,7 +4,7 @@ import Layout from "../Layout";
 const Dashboard = () =>{
 return(
     <Layout>
-    <Typography sx = {{mt:6}}>Profile</Typography>
+    <Typography sx = {{mt:6}}>Dashboard</Typography>
     </Layout>
 )
 }

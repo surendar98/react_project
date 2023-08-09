@@ -27,6 +27,7 @@ const Login = () => {
      try {
       const response= await axios.post('http://localhost:5000/api/login', { data });
       if(response.status){
+          sessionStorage.setItem('user',JSON.stringify(response.data.data))
           navigate('/dashboard')
       }
 

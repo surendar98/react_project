@@ -152,6 +152,7 @@ const Header = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+    sessionStorage.removeItem('user')
     navigate('/')
   };
   return (
