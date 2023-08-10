@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const savePayment=(paymentId,amount)=>{
-    axios.post('http://localhost:5000/api/payment', {paymentId,amount});
-     
+    const user= JSON.parse(sessionStorage.getItem('user'));
+    axios.post('http://localhost:5000/api/payment', {username:user.username, paymentId,amount});     
 }
 export default async function displayRazorpay(amount) {
  const data = await axios.post('http://localhost:5000/api/razorpay', { amount });
@@ -16,9 +16,7 @@ export default async function displayRazorpay(amount) {
     image: "http://localhost:5000/logo.png",
     order_id: data.data.id,
     handler: function (response) {
-      console.log("PAYMENT ID ::" + response.razorpay_amount);
       savePayment(response.razorpay_payment_id,data.data.amount);
-       // console.log("ORDER ID :: " + response.razorpay_order_id);
       alert("Payment Success")
     }
   };

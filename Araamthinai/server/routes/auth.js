@@ -52,13 +52,15 @@ router.post('/razorpay', async (req, res) => {
 
 
 router.post('/payment', async (req, res) => {
+  console.log(req)
   try {
-    const { paymentId,amount } = req.body;
-    // const username= JSON.parse(sessionStorage.getItem('user')).username;
-    const newPayment = new Payment({paymentId,amount});
+    const { username,paymentId,amount } = req.body;
+    console.log(username)
+    const newPayment = new Payment({username,paymentId,amount});
     await newPayment.save();
     res.status(201).json({ message: 'Payment successful' });
   } catch (error) {
+    console.log(error.response)
     res.status(500).json({ message: 'An error occurred' });
   }
 });

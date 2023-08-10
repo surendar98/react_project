@@ -24,9 +24,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +32,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.MuiTab-root{
+  color:white !important;
+}
+
+.active{
+  color: #ff66b3 !important;
+  font-weight: bold;
 }

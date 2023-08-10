@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -49,10 +49,12 @@ const styles = {
     },
   },
   tab: {
-    ...theme.typography.tab,
     minWidth: 10,
     marginLeft: '25px',
     color: 'white',
+    '& .Mui-selected':{
+      color:'#ff'
+    }
   },
 
   hamburgerMenuIcon: {
@@ -78,16 +80,17 @@ const DesktopNavigation = () => {
     setValue(newValue);
   };
 
+  const {pathname}=useLocation();
+
    return (
     <Tabs
       value={value}
       onChange={handleChange}
       sx={styles.tabs}
     >
-      <Tab sx={styles.tab} label="Profile" component={Link} to="/dashboard" />
-      <Tab sx={styles.tab} label="Payment" component={Link} to="/payment" />
-
-    </Tabs>
+        <Tab sx={styles.tab} className={pathname==='/' && 'active'} label="Profile" component={Link} to="/" />
+        <Tab sx={styles.tab} className={pathname==='/payment' && 'active'} label="Payment" component={Link} to="/payment" />
+     </Tabs>
   );
 };
 
@@ -113,7 +116,7 @@ const MobileNavigation = () => {
             <ListItem
               divider
               component={Link}
-              to="/dashboard"
+              to="/"
               onClick={() => setOpenDrawer(false)}
             >
               <ListItemText disableTypography>Profile</ListItemText>

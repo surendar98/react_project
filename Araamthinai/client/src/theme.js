@@ -24,7 +24,7 @@ const theme = createTheme({
             styleOverrides:{
                 root:{
                 '& .Mui-selected':{
-                    color:"#000"
+                    color:"#000 !important"
                 }
             }
             }
