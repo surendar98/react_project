@@ -13,7 +13,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Avatar } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 
 const styles = {
@@ -88,9 +88,8 @@ const DesktopNavigation = () => {
       onChange={handleChange}
       sx={styles.tabs}
     >
-        <Tab sx={styles.tab} className={pathname==='/' && 'active'} label="Profile" component={Link} to="/" />
-        <Tab sx={styles.tab} className={pathname==='/payment' && 'active'} label="Payment" component={Link} to="/payment" />
-     </Tabs>
+        <Tab sx={styles.tab} className={pathname==='/' && 'active'} label="Dashboard" component={Link} to="/" />
+      </Tabs>
   );
 };
 
@@ -119,20 +118,12 @@ const MobileNavigation = () => {
               to="/"
               onClick={() => setOpenDrawer(false)}
             >
-              <ListItemText disableTypography>Profile</ListItemText>
-            </ListItem>
-            <ListItem
-              divider
-              component={Link}
-              to="/payment"
-              onClick={() => setOpenDrawer(false)}
-            >
-              <ListItemText disableTypography>Payment</ListItemText>
+              <ListItemText disableTypography>Dashboard</ListItemText>
             </ListItem>
     
           </List>
         </Paper>
-      </SwipeableDrawer>
+      </SwipeableDrawer>     
       <IconButton
         sx={styles.menuIconContainer}
         onClick={() => setOpenDrawer(!openDrawer)}
@@ -158,6 +149,7 @@ const Header = () => {
     sessionStorage.removeItem('user')
     navigate('/')
   };
+  
   return (
     <Fragment>
       <AppBar
@@ -167,24 +159,25 @@ const Header = () => {
       >
         <Toolbar disableGutters={true}>
                 {isMobileMode ? <MobileNavigation /> : <DesktopNavigation />}
+                
                 <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
             onClick={handleClick}
           >
             <Avatar/>
           </IconButton>
+          <Typography sx={{mr:2}}>{JSON.parse(sessionStorage.getItem('user'))?.email}</Typography>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
-            onClose={handleClose}
+            onClose={()=>handleClose}
           >
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={()=>handleClose}>Logout</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

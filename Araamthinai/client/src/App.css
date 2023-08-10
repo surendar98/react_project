@@ -34,10 +34,6 @@
   }
 }
 
-.MuiTab-root{
-  color:white !important;
-}
-
 .active{
   color: #ff66b3 !important;
   font-weight: bold;

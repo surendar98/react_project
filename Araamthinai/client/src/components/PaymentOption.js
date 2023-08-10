@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-
 import displayRazorpay from "../utils/PaymentGateway";
-import Layout from "../Layout";
 import { Button, Grid, Typography } from "@mui/material";
-import theme from "../theme";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 const PaymentOptions = () => {
 
@@ -23,10 +19,9 @@ const PaymentOptions = () => {
   }
 
   return (
-    <Layout>
-        <Grid container sx={{pt:6}}  alignItems='center' justifyContent='center' rowSpacing={2}>
+        <Grid container spacing={2}>
             <Grid item xs={12}>
-             <Typography variant="h3" color={theme.palette.primary.main}>Choose Your Payment Amount:</Typography>
+             <Typography color='black'>Choose Your Payment Amount:</Typography>
             </Grid>
             <Grid item xs={12} sx={{px:4}}>
                 <FormControl onChange={(e)=>handleChange(e)}>
@@ -44,7 +39,6 @@ const PaymentOptions = () => {
                 <Button type="button" variant="contained" onClick={handleSubmit}>Pay</Button>
             </Grid>
         </Grid>
-    </Layout>
   );
 };
 

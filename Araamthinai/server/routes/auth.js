@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ status:false,message: 'Authentication failed' });
     }
 
-    res.json({ status:true,message: 'Login successful',data:{'username':user.username,usertype:user.userType} });
+    res.json({ status:true,message: 'Login successful',data:{'username':user.username,'email':user.email,usertype:user.userType} });
   } catch (error) {
     res.status(500).json({ status:false,message: 'An error occurred' });
   }
